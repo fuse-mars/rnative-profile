@@ -7,7 +7,7 @@ import Images from '../constants/Images';
 import { Ionicons } from '@expo/vector-icons';
 
 @withNavigation
-export default class ProfileButton extends React.PureComponent {
+export default class CreateButton extends React.PureComponent {
   render() {
     return (
       <TouchableOpacity
@@ -15,7 +15,7 @@ export default class ProfileButton extends React.PureComponent {
         hitSlop={{ top: 40, left: 40, right: 30, bottom: 30 }}
         onPress={this.props.onPress || this._toggleProfile}>
         <Text style={styles.backButtonText}>
-          <Ionicons name="ios-person" size={32} color="white" />
+          <Ionicons name="ios-add-circle" size={32} color="white" />
         </Text>
       </TouchableOpacity>
     );

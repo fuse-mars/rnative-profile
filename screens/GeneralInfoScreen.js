@@ -10,13 +10,18 @@ import {
 } from 'react-native';
 
 import { Colors, Fonts, Layout } from '../constants';
-import { SlackBanner, TwitterBanner } from '../components/InfoBanners';
+import {
+  AddQuestionForm,
+  SlackBanner,
+  TwitterBanner,
+} from '../components/InfoBanners';
 import RoundedButton from '../components/RoundedButton';
 import PurpleGradient from '../components/PurpleGradient';
 import StatusBarUnderlay from '../components/StatusBarUnderlay';
 import Sponsors from '../components/Sponsors';
 import NavigationEvents from '../utilities/NavigationEvents';
 import ProfileButton from '../components/ProfileButton';
+import CreateButton from '../components/CreateButton';
 
 // import ConferenceAnnouncements from '../Components/ConferenceAnnouncements'
 
@@ -33,6 +38,18 @@ export default class GeneralInfoScreen extends React.Component {
   state = {
     activeTab: TABS.TODAY.key,
     scrollY: new Animated.Value(0),
+    showProfile: false,
+    showAddQuestionForm: false,
+  };
+
+  toggleProfile = () => {
+    let showProfile = !this.state.showProfile;
+    this.setState({ showProfile });
+  };
+
+  toggleAddQuestionForm = () => {
+    let showAddQuestionForm = !this.state.showAddQuestionForm;
+    this.setState({ showAddQuestionForm });
   };
 
   componentWillMount() {
@@ -70,9 +87,20 @@ export default class GeneralInfoScreen extends React.Component {
           scrollEventThrottle={1}
           bounces={true}>
           <View style={styles.container}>
-            <ProfileButton style={styles.backButton} />
-            {/* <SlackBanner /> */}
-            <TwitterBanner />
+            <CreateButton
+              style={styles.createButton}
+              toggleProfile={this.toggleAddQuestionForm}
+            />
+            <ProfileButton
+              style={styles.profileButton}
+              toggleProfile={this.toggleProfile}
+            />
+            {this.state.showProfile && <SlackBanner />}
+            {this.state.showAddQuestionForm ? (
+              <AddQuestionForm />
+            ) : (
+              <TwitterBanner />
+            )}
 
             {this._renderTabs()}
           </View>
@@ -188,10 +216,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backButton: {
+  profileButton: {
     position: 'absolute',
     top: 30,
     right: 20,
+    zIndex: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  createButton: {
+    position: 'absolute',
+    top: 30,
+    left: 20,
+    zIndex: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
