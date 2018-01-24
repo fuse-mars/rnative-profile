@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Chain React",
-    "description": "An app for the Chain React Conference in Portland, Oregon on July 10 and 11, 2017 - check the conference out at https://infinite.red/ChainReactConf -- this app is a fork of the original, you can find the source at https://github.com/brentvatne/chain-react-conf",
-    "slug": "chain-react",
+    "name": "RNP",
+    "description": "React Native Profile",
+    "slug": "react-np",
     "privacy": "public",
-    "sdkVersion": "18.0.0",
+    "sdkVersion": "25.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",

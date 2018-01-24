@@ -2,7 +2,9 @@ import { Platform, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Colors from '../constants/Colors';
-import MainTabNavigator from './MainTabNavigator';
+// import MainTabNavigator from './MainTabNavigator';
+import GeneralInfoScreen from '../screens/GeneralInfoScreen';
+
 import TalkDetailScreen from '../screens/TalkDetailScreen';
 import BreakDetailScreen from '../screens/BreakDetailScreen';
 
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
 
 const RootNavigation = StackNavigator(
   {
-    MainTabs: { screen: MainTabNavigator },
+    MainTabs: { screen: GeneralInfoScreen },
     TalkDetail: { screen: TalkDetailScreen },
     BreakDetail: { screen: BreakDetailScreen },
   },

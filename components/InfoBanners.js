@@ -20,10 +20,10 @@ export class SlackBanner extends React.PureComponent {
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
         style={slackStyles.container}>
-        <Image style={slackStyles.icon} source={Images.slack} />
-        <Text style={slackStyles.heading}>Join Us On Slack</Text>
+        <Image style={slackStyles.icon} source={Images.logo} />
+        <Text style={slackStyles.heading}>Login</Text>
         <RoundedButton
-          text="Join the IR Slack Community"
+          text="Facebook"
           onPress={() => {
             WebBrowser.openBrowserAsync('http://community.infinite.red');
           }}
@@ -40,15 +40,9 @@ export class TwitterBanner extends React.PureComponent {
       <View style={twitterStyles.container}>
         <Image style={twitterStyles.blowhorn} source={Images.blowhorn} />
         <TouchableOpacity onPress={this._tweetWithHashtag}>
-          <Text style={twitterStyles.heading}>#ChainReact2017</Text>
+          <Text style={twitterStyles.heading}>#rnp</Text>
         </TouchableOpacity>
-        <Text style={twitterStyles.description}>
-          Make your friends jealous by tweeting, posting, or whatever it is you
-          do with the hashtag&nbsp;
-          <Text style={twitterStyles.hashtag} onPress={this._tweetWithHashtag}>
-            #chainreact2017
-          </Text>.
-        </Text>
+        <Text style={twitterStyles.description}>Your React Native Profile</Text>
       </View>
     );
   }

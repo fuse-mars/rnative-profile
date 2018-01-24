@@ -62,7 +62,7 @@ export default class GeneralInfoScreen extends React.Component {
             { useNativeDriver: true }
           )}
           scrollEventThrottle={1}
-          bounces={false}>
+          bounces={true}>
           <View style={styles.container}>
             <SlackBanner />
             <TwitterBanner />
