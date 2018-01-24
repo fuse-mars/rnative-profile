@@ -38,6 +38,7 @@ function addReminder(state, { time, notificationId }) {
 function removeReminder(state, notificationId) {
   let reminder = find(
     state.reminders,
+
     reminder => reminder.notificationId === notificationId
   );
 

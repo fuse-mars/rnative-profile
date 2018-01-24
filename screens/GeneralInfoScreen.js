@@ -16,16 +16,22 @@ import PurpleGradient from '../components/PurpleGradient';
 import StatusBarUnderlay from '../components/StatusBarUnderlay';
 import Sponsors from '../components/Sponsors';
 import NavigationEvents from '../utilities/NavigationEvents';
+import ProfileButton from '../components/ProfileButton';
 
 // import ConferenceAnnouncements from '../Components/ConferenceAnnouncements'
 
+export const TABS = {
+  TODAY: { key: 'TODAY', name: 'Today' },
+  PAST: { key: 'PAST', name: 'Past' },
+};
+
 export default class GeneralInfoScreen extends React.Component {
   static navigationOptions = {
-    title: 'General Info',
+    title: 'RN Trivia',
   };
 
   state = {
-    activeTab: 'liveHelp',
+    activeTab: TABS.TODAY.key,
     scrollY: new Animated.Value(0),
   };
 
@@ -64,7 +70,8 @@ export default class GeneralInfoScreen extends React.Component {
           scrollEventThrottle={1}
           bounces={true}>
           <View style={styles.container}>
-            <SlackBanner />
+            <ProfileButton style={styles.backButton} />
+            {/* <SlackBanner /> */}
             <TwitterBanner />
 
             {this._renderTabs()}
@@ -92,19 +99,19 @@ export default class GeneralInfoScreen extends React.Component {
     const { activeTab } = this.state;
     const liveHelpStyles = [
       styles.tab,
-      activeTab === 'liveHelp' && styles.activeTab,
+      activeTab === TABS.TODAY.key && styles.activeTab,
     ];
     const sponsorStyles = [
       styles.tab,
-      activeTab === 'sponsors' && styles.activeTab,
+      activeTab === TABS.PAST.key && styles.activeTab,
     ];
     const liveHelpTextStyles = [
       styles.tabText,
-      activeTab === 'liveHelp' && styles.activeTabText,
+      activeTab === TABS.TODAY.key && styles.activeTabText,
     ];
     const sponsorTextStyles = [
       styles.tabText,
-      activeTab === 'sponsors' && styles.activeTabText,
+      activeTab === TABS.PAST.key && styles.activeTabText,
     ];
 
     return (
@@ -112,22 +119,43 @@ export default class GeneralInfoScreen extends React.Component {
         <View style={styles.tabs}>
           <TouchableOpacity
             style={liveHelpStyles}
-            onPress={() => this._setActiveTab('liveHelp')}>
-            <Text style={liveHelpTextStyles}>Live Help</Text>
+            onPress={() => this._setActiveTab(TABS.TODAY.key)}>
+            <Text style={liveHelpTextStyles}>Today</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={sponsorStyles}
-            onPress={() => this._setActiveTab('sponsors')}>
-            <Text style={sponsorTextStyles}>Sponsors</Text>
+            onPress={() => this._setActiveTab(TABS.PAST.key)}>
+            <Text style={sponsorTextStyles}>Past</Text>
           </TouchableOpacity>
         </View>
-        {activeTab === 'liveHelp'
-          ? this._renderLiveHelp()
+        {activeTab === TABS.TODAY.key
+          ? this._renderTodayTrivia()
           : this._renderSponsors()}
       </View>
     );
   };
+
+  _renderTodayTrivia() {
+    return (
+      <View style={styles.liveHelp}>
+        <Text style={styles.liveHelpPhone}>01-24-2018</Text>
+        <Text style={styles.liveHelpText}>
+          Does a React Native App run in a browser?
+        </Text>
+        <RoundedButton
+          text="YES"
+          onPress={() => Linking.openURL('sms:3605620450')}
+          style={styles.liveHelpButton}
+        />
+        <RoundedButton
+          text="NO"
+          onPress={() => Linking.openURL('tel:3605620450')}
+          style={styles.liveHelpButton}
+        />
+      </View>
+    );
+  }
 
   _renderLiveHelp() {
     return (
@@ -159,6 +187,13 @@ export default class GeneralInfoScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 30,
+    right: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   heading: {
     marginTop: 14,
